@@ -1,0 +1,76 @@
+{
+  "name": "Letter",
+  "type": "object",
+  "properties": {
+    "sender_name": {
+      "type": "string",
+      "description": "Nome de quem envia a cartinha"
+    },
+    "contact": {
+      "type": "string",
+      "description": "Instagram, WhatsApp ou outro contato (opcional)"
+    },
+    "turma": {
+      "type": "string",
+      "enum": [
+        "1\u00b0 Ano A",
+        "1\u00b0 Ano B",
+        "1\u00b0 Ano C",
+        "1\u00b0 Ano D",
+        "1\u00b0 Ano E",
+        "1\u00b0 Ano F",
+        "1\u00b0 Ano Redes",
+        "2\u00b0 Ano A",
+        "2\u00b0 Ano B",
+        "2\u00b0 Ano C",
+        "2\u00b0 Ano D",
+        "2\u00b0 Ano E",
+        "2\u00b0 Ano Redes",
+        "3\u00b0 Ano A",
+        "3\u00b0 Ano B",
+        "3\u00b0 Ano C",
+        "3\u00b0 Ano D",
+        "3\u00b0 Ano Redes"
+      ],
+      "description": "Turma do destinat\u00e1rio"
+    },
+    "message": {
+      "type": "string",
+      "description": "Mensagem da cartinha"
+    },
+    "gift_type": {
+      "type": "string",
+      "enum": [
+        "bilhetinho_bis",
+        "bilhetinho_sonho",
+        "carta_bis",
+        "carta_sonho",
+        "carta_rosa"
+      ],
+      "description": "Tipo da cartinha escolhida"
+    },
+    "gift_label": {
+      "type": "string",
+      "description": "Nome leg\u00edvel do tipo de cartinha"
+    },
+    "price": {
+      "type": "number",
+      "description": "Valor pago"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "paid",
+        "delivered"
+      ],
+      "default": "pending",
+      "description": "Status da cartinha"
+    }
+  },
+  "required": [
+    "sender_name",
+    "message",
+    "gift_type"
+  ]
+}
