@@ -13,7 +13,7 @@ const steps = [
   {
     icon: Gift,
     title: 'Escolha o presente',
-    description: 'Selecione o tipo de cartinha e o mimo que acompanha: de um BIS a uma rosa real.',
+    description: 'Selecione o tipo de cartinha e o mimo que será acompanhado.',
     color: 'text-accent',
     bg: 'bg-accent/10',
   },
