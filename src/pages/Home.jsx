@@ -11,6 +11,33 @@ import FAQ from '../components/romantic/FAQ';
 import CTASection from '../components/romantic/CTASection';
 import Footer from '../components/romantic/Footer';
 
+const messages = [
+  "Ela pensou em você agora!",
+  "Ele pensou em você agora!",
+  "Você foi alvo do cupido!",
+  "Tem amor escondido aqui",
+  "Uma surpresa te espera",
+  "Abra antes que o cupido volte",
+  "Mensagem anônima recebida",
+  "Essa é sua hora de encantá-la",
+  "Olha só, perdeu a vergonha 👀",
+  "Tem alguém criando coragem... 👀",
+  "Seu nome passou pela cabeça dela",
+  "Alguém sorriu lembrando de você",
+  "Hoje o cupido resolveu trabalhar",
+  "Tem sentimento vindo aí! 👀",
+  "Alguém quer chamar sua atenção",
+  "Seu coração recebeu uma notificação 👀",
+  "Essa mensagem pode mudar tudo!",
+  "Tem flerte no ar... 👀",
+  "O amor acabou de bater aqui",
+  "Seu cupido está online 🏹",
+  "Alguém criou coragem hoje 👀",
+];
+
+const randomMessage =
+  messages[Math.floor(Math.random() * messages.length)];
+
 const textReveal = {
   hidden: { opacity: 0 },
   visible: (i) => ({
@@ -35,11 +62,14 @@ function HeroSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/60 border border-primary/10 mb-8 mt-12 md:mt-0"
-          >
-            <Sparkles size={14} className="text-accent" />
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/60 border border-primary/10 mb-8 mt-12 md:mt-0">
+            <img
+              src="https://i.imgur.com/wESx6oS.png"
+              alt="icone"
+              className="w-[20px] h-[20px] object-contain"
+            />
             <span className="text-xs font-medium text-foreground/70 tracking-wide uppercase">
-              Correio Elegante Digital
+              {randomMessage}
             </span>
           </motion.div>
 
