@@ -46,21 +46,36 @@ export default function SendLetter() {
     '3° Ano A', '3° Ano B', '3° Ano C', '3° Ano D', '3° Ano Redes', 'Outros'
   ];
 
-  const validate = () => {
-    const newErrors = {};
-    if (!senderName.trim()) newErrors.senderName = 'O nome é obrigatório';
-    if (!turma) {
-      newErrors.turma = 'Selecione uma turma';
-    }
-    if (turma === 'Outros' && !otherTurma.trim()) {
-      newErrors.otherTurma = 'Digite a turma';
-    }
-    if (!message.trim()) newErrors.message = 'A mensagem é obrigatória';
-    if (message.length > maxChars) newErrors.message = 'Mensagem muito longa';
-    if (!selectedGift) newErrors.gift = 'Escolha um tipo de cartinha';
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+const validate = () => {
+  const newErrors = {};
+
+  if (!senderName.trim()) newErrors.senderName = 'O nome é obrigatório';
+  if (senderName.trim().length < 2) newErrors.senderName = 'Digite um nome válido';
+
+  if (!turma) newErrors.turma = 'Selecione uma turma';
+  if (turma === 'Outros' && !otherTurma.trim()) newErrors.otherTurma = 'Digite a turma';
+
+  if (!message.trim()) {
+    newErrors.message = 'A mensagem é obrigatória';
+} else {
+  const words = message.trim().split(/\s+/).filter(w => w.length > 1);
+  const meaningfulWords = words.filter(w => w.length >= 2);
+  const hasRepetition = /(.)\1{4,}/.test(message);
+  const hasRealWords = meaningfulWords.some(w => /[aeiouáéíóúãõâêîôû]/i.test(w));
+  const hasGibberish = words.some(w => /[^aeiouáéíóúãõâêîôû\s]{4,}/i.test(w));
+
+  if (meaningfulWords.length < 3) newErrors.message = 'Escreva uma mensagem de verdade (mínimo 3 palavras)';
+  else if (hasRepetition) newErrors.message = 'Mensagem inválida';
+  else if (!hasRealWords) newErrors.message = 'Mensagem inválida';
+  else if (hasGibberish) newErrors.message = 'Mensagem inválida';
+  else if (message.length > maxChars) newErrors.message = 'Mensagem muito longa';
+}
+
+  if (!selectedGift) newErrors.gift = 'Escolha um tipo de cartinha';
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
 
   const handleSubmit = async () => {
     if (!validate()) return;
