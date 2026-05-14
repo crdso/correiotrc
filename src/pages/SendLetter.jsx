@@ -150,7 +150,7 @@ export default function SendLetter() {
                 Cartinha salva!
               </h2>
               <p className="text-muted-foreground mb-8">
-                Sua cartinha foi registrada. Agora é só realizar o pagamento para ela ser entregue.
+                Sua cartinha foi registrada. Após o pagamento confirmado, sua cartinha será entregue em breve. 💌
               </p>
             </motion.div>
  
