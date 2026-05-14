@@ -35,7 +35,7 @@ function HeroSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/60 border border-primary/10 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/60 border border-primary/10 mb-8 mt-12 md:mt-0"
           >
             <Sparkles size={14} className="text-accent" />
             <span className="text-xs font-medium text-foreground/70 tracking-wide uppercase">
@@ -77,7 +77,7 @@ function HeroSection() {
             className="text-lg md:text-xl text-muted-foreground mt-6 max-w-md leading-relaxed"
           >
             Envie uma mensagem secreta para quem faz seu coração bater mais forte. 
-            Simples, lúdico e <span className="text-primary font-medium">inesquecível</span>.
+            Simples e <span className="text-primary font-medium">inesquecível</span>.
           </motion.p>
 
           <motion.div

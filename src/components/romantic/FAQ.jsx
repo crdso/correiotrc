@@ -10,23 +10,19 @@ import {
 const faqs = [
   {
     q: 'Minha identidade será revelada?',
-    a: 'Somente se você quiser! Você pode deixar um contato opcional. Caso contrário, a entrega será totalmente anônima e misteriosa. 💌',
+    a: 'Somente se você quiser! Você pode deixar um contato opcional. Caso contrário, a entrega será totalmente anônima.',
   },
   {
     q: 'Como funciona a entrega?',
-    a: 'Após o pagamento confirmado, nossa equipe prepara sua cartinha com carinho e a entrega pessoalmente ao destinatário no local combinado.',
+    a: 'Nossa equipe prepara sua cartinha com carinho e a entrega pessoalmente ao destinatário. Prazo de até 1 dia útil desde a confirmação de pagamento do seu pedido.',
   },
   {
     q: 'Posso personalizar a mensagem?',
-    a: 'Sim! Você escreve a mensagem do seu jeito. Nós apenas transcrevemos com uma caligrafia bonita na cartinha física.',
+    a: 'Sim! Você escreve a mensagem do seu jeito. Atente-se que bilhetes são pequenos, então temos um limite de palavras que pode ser escrito. Da mesma forma com a cartinha.',
   },
   {
-    q: 'O pagamento é seguro?',
-    a: 'Totalmente! Usamos o Mercado Pago, uma das plataformas mais seguras do Brasil, para processar todos os pagamentos.',
-  },
-  {
-    q: 'E se a pessoa não estiver no local?',
-    a: 'Tentamos a entrega em até 2 momentos. Caso não consigamos, entramos em contato com você para remarcar.',
+    q: 'E se a pessoa não estiver na sala?',
+    a: 'Tentamos a entrega em até 2 momentos. Caso seja um local (no campus) à desejo do remetente, pedimos que deixe esclarecido na caixinha de "Sua Mensagem" ao enviar o pedido.',
   },
   {
     q: 'Posso enviar mais de uma cartinha?',

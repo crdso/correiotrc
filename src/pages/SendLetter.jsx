@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Send, ArrowLeft, AlertCircle, Loader2, ExternalLink, CheckCircle2 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ import GiftCard from '../components/romantic/GiftCard';
 import ConfettiExplosion from '../components/romantic/ConfettiExplosion';
 import Footer from '../components/romantic/Footer';
 
-const MAX_CHARS = 500;
+const SMALL_GIFT_IDS = ['bilhetinho_pirulito', 'bilhetinho_sonho'];
 
 export default function SendLetter() {
   const navigate = useNavigate();
@@ -38,6 +38,8 @@ export default function SendLetter() {
   const [isConfirming, setIsConfirming] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
 
+  const maxChars = selectedGift && SMALL_GIFT_IDS.includes(selectedGift.id) ? 150 : 500;
+
   const TURMAS = [
     '1° Ano A', '1° Ano B', '1° Ano C', '1° Ano D', '1° Ano E', '1° Ano F', '1° Ano Redes',
     '2° Ano A', '2° Ano B', '2° Ano C', '2° Ano D', '2° Ano E', '2° Ano Redes',
@@ -54,7 +56,7 @@ export default function SendLetter() {
       newErrors.otherTurma = 'Digite a turma';
     }
     if (!message.trim()) newErrors.message = 'A mensagem é obrigatória';
-    if (message.length > MAX_CHARS) newErrors.message = 'Mensagem muito longa';
+    if (message.length > maxChars) newErrors.message = 'Mensagem muito longa';
     if (!selectedGift) newErrors.gift = 'Escolha um tipo de cartinha';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -296,52 +298,88 @@ export default function SendLetter() {
                 ))}
               </select>
               <AnimatePresence>
-  {turma === 'Outros' && (
-    <motion.div
-      initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: 'auto' }}
-      exit={{ opacity: 0, height: 0 }}
-      className="mt-4"
-    >
-      <input
-        type="text"
-        value={otherTurma}
-        onChange={(e) => {
-          setOtherTurma(e.target.value);
-
-          if (errors.otherTurma) {
-            setErrors({
-              ...errors,
-              otherTurma: null
-            });
-          }
-        }}
-        placeholder="Digite a turma..."
-        className={`w-full px-5 py-4 rounded-2xl bg-card/60 backdrop-blur-sm border outline-none transition-all text-foreground placeholder:text-muted-foreground/60 ${
-          errors.otherTurma
-            ? 'border-destructive focus:ring-2 focus:ring-destructive/10'
-            : 'border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/10'
-        }`}
-      />
-
-      {errors.otherTurma && (
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="text-destructive text-xs mt-2 flex items-center gap-1"
-        >
-          <AlertCircle size={12} />
-          {errors.otherTurma}
-        </motion.p>
-      )}
-    </motion.div>
-  )}
-</AnimatePresence>
+                {turma === 'Outros' && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-4"
+                  >
+                    <input
+                      type="text"
+                      value={otherTurma}
+                      onChange={(e) => {
+                        setOtherTurma(e.target.value);
+                        if (errors.otherTurma) {
+                          setErrors({ ...errors, otherTurma: null });
+                        }
+                      }}
+                      placeholder="Digite a turma..."
+                      className={`w-full px-5 py-4 rounded-2xl bg-card/60 backdrop-blur-sm border outline-none transition-all text-foreground placeholder:text-muted-foreground/60 ${
+                        errors.otherTurma
+                          ? 'border-destructive focus:ring-2 focus:ring-destructive/10'
+                          : 'border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/10'
+                      }`}
+                    />
+                    {errors.otherTurma && (
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="text-destructive text-xs mt-2 flex items-center gap-1"
+                      >
+                        <AlertCircle size={12} />
+                        {errors.otherTurma}
+                      </motion.p>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
               <AnimatePresence>
                 {errors.turma && (
                   <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-destructive text-xs mt-2 flex items-center gap-1">
                     <AlertCircle size={12} /> {errors.turma}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.div>
+
+            {/* Seleção do tipo da cartinha */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 }}
+            >
+              <label className="block text-sm font-medium text-foreground mb-4">
+                Tipo da cartinha <span className="text-primary">*</span>
+              </label>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {GIFT_OPTIONS.map((item) => (
+                  <GiftCard
+                    key={item.id}
+                    item={item}
+                    isSelected={selectedGift?.id === item.id}
+                    onSelect={(gift) => {
+                      setSelectedGift(gift);
+                      if (errors?.gift) {
+                        setErrors({ ...errors, gift: null });
+                      }
+                    }}
+                  />
+                ))}
+              </div>
+
+              <AnimatePresence>
+                {errors?.gift && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="text-destructive text-xs mt-3 flex items-center gap-1"
+                  >
+                    <AlertCircle size={12} />
+                    {errors.gift}
                   </motion.p>
                 )}
               </AnimatePresence>
@@ -353,7 +391,14 @@ export default function SendLetter() {
               </label>
               <textarea
                 value={message}
-                onChange={(e) => { if (e.target.value.length <= MAX_CHARS) { setMessage(e.target.value); if (errors.message) setErrors({ ...errors, message: null }); } }}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  // Allow editing/deleting freely; only block adding new chars beyond limit
+                  if (val.length <= maxChars || val.length < message.length) {
+                    setMessage(val);
+                    if (errors.message) setErrors({ ...errors, message: null });
+                  }
+                }}
                 placeholder="Escreva aqui o que seu coração quer dizer..."
                 rows={5}
                 className={`w-full px-5 py-4 rounded-2xl bg-card/60 backdrop-blur-sm border outline-none transition-all text-foreground placeholder:text-muted-foreground/60 resize-none ${errors.message ? 'border-destructive focus:ring-2 focus:ring-destructive/10' : 'border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/10'}`}
@@ -366,56 +411,14 @@ export default function SendLetter() {
                     </motion.p>
                   )}
                 </AnimatePresence>
-                <span className={`text-xs ml-auto ${message.length > MAX_CHARS * 0.9 ? 'text-destructive font-medium' : 'text-muted-foreground'}`}>
-                  {message.length}/{MAX_CHARS}
+                <span className={`text-xs ml-auto ${message.length > maxChars ? 'text-destructive font-bold' : message.length > maxChars * 0.9 ? 'text-destructive font-medium' : 'text-muted-foreground'}`}>
+                  {message.length}/{maxChars}
+                  {message.length > maxChars && ' — mensagem muito longa para esta opção'}
                 </span>
               </div>
             </motion.div>
 
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.25 }}
->
-  <label className="block text-sm font-medium text-foreground mb-4">
-    Tipo da cartinha <span className="text-primary">*</span>
-  </label>
-
-  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-    {GIFT_OPTIONS.map((item) => (
-      <GiftCard
-        key={item.id}
-        item={item}
-        isSelected={selectedGift?.id === item.id}
-        onSelect={(gift) => {
-          setSelectedGift(gift);
-
-          if (errors?.gift) {
-            setErrors({
-              ...errors,
-              gift: null,
-            });
-          }
-        }}
-      />
-    ))}
-  </div>
-
-  <AnimatePresence>
-    {errors?.gift && (
-      <motion.p
-        initial={{ opacity: 0, y: -5 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0 }}
-        className="text-destructive text-xs mt-3 flex items-center gap-1"
-      >
-        <AlertCircle size={12} />
-        {errors.gift}
-      </motion.p>
-    )}
-  </AnimatePresence>
-</motion.div>
-
+            {/* Resumo do pedido */}
             <AnimatePresence>
               {selectedGift && (
                 <motion.div
@@ -438,6 +441,7 @@ export default function SendLetter() {
               )}
             </AnimatePresence>
 
+            {/* Botão de redirecionamento */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="pt-2">
               <motion.button
                 whileHover={!isSubmitting ? { scale: 1.02, boxShadow: '0 20px 40px rgba(217, 4, 41, 0.25)' } : {}}
