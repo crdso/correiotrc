@@ -269,6 +269,11 @@ export default function Admin() {
                         <p className={`text-sm text-muted-foreground ${isExpanded ? '' : 'line-clamp-2'}`}>
                           {c.message}
                         </p>
+                        {c.ler_para_sala && (
+                          <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                            🔊 Ler para sala
+                          </span>
+                        )}
                         {c.contact && (
                           <p className="text-xs text-accent mt-1">📱 {c.contact}</p>
                         )}
