@@ -8,7 +8,7 @@ import ParticleBackground from '../components/romantic/ParticleBackground';
 
 export default function Sucesso() {
   useEffect(() => {
-    document.title = 'Cartinha enviada! 💌 — Correio Elegante';
+    document.title = 'Cartinha enviada!';
   }, []);
 
   return (
