@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
 import StatsCards from '@/components/admin/StatsCards';
 
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'l4b1nf022!!';
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
 const STATUS_LABELS = {
   pending: { label: 'Pendente', color: 'bg-yellow-100 text-yellow-700' },
