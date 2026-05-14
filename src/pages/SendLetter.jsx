@@ -137,7 +137,7 @@ export default function SendLetter() {
         <FloatingHearts count={6} />
         <Navbar />
         {showConfetti && <ConfettiExplosion />}
-
+ 
         <div className="relative z-10 pt-28 pb-16 px-6">
           <div className="max-w-lg mx-auto text-center">
             <motion.div
@@ -153,7 +153,7 @@ export default function SendLetter() {
                 Sua cartinha foi registrada. Agora é só realizar o pagamento para ela ser entregue.
               </p>
             </motion.div>
-
+ 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -169,39 +169,14 @@ export default function SendLetter() {
                 <ExternalLink size={20} />
                 Abrir link de pagamento
               </motion.button>
-
-              <div className="relative my-8">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-border/50" />
-                </div>
-                <div className="relative flex justify-center">
-                  <span className="bg-background px-4 text-sm text-muted-foreground">
-                    já pagou?
-                  </span>
-                </div>
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={handleConfirmPayment}
-                disabled={isConfirming}
-                className="w-full py-4 bg-secondary text-secondary-foreground rounded-2xl text-lg font-semibold flex items-center justify-center gap-3 disabled:opacity-70"
-              >
-                {isConfirming ? (
-                  <><Loader2 size={20} className="animate-spin" /> Confirmando...</>
-                ) : (
-                  <><CheckCircle2 size={20} /> Já paguei! ✅</>
-                )}
-              </motion.button>
-
+ 
               <p className="text-xs text-muted-foreground mt-4">
-                Após clicar em "Já paguei", sua cartinha será marcada como paga.
+                Após o pagamento, sua cartinha será confirmada e entregue em breve. 💌
               </p>
             </motion.div>
           </div>
         </div>
-
+ 
         <Footer />
       </div>
     );
