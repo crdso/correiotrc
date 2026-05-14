@@ -24,7 +24,8 @@ export default function SendLetter() {
   const [message, setMessage] = useState('');
   const [selectedGift, setSelectedGift] = useState(null);
   const [submitted, setSubmitted] = useState(false);
-  const [cartinhaId, setCartinhaId] = useState(null);
+  const [cartinhaId, setCartinhaId] = useState(null)
+  const [lerParaSala, setLerParaSala] = useState(false);
 
   const [errors, setErrors] = useState({
     senderName: null,
@@ -93,6 +94,7 @@ const validate = () => {
         gift_label: selectedGift.nome,
         price: selectedGift.price,
         status: "pending",
+        ler_para_sala: lerParaSala,
       }).select('id').single();
 
       if (error) throw error;
@@ -407,6 +409,23 @@ const validate = () => {
                 </span>
               </div>
             </motion.div>
+
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 }}>
+  <div
+    onClick={() => setLerParaSala(!lerParaSala)}
+    className={`flex items-center gap-4 cursor-pointer p-5 rounded-2xl border transition-all ${lerParaSala ? 'bg-primary/5 border-primary/30' : 'bg-card/60 border-border/50'}`}
+  >
+    <div className={`relative w-12 h-6 rounded-full transition-colors duration-300 shrink-0 ${lerParaSala ? 'bg-primary' : 'bg-muted'}`}>
+      <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-transform duration-300 ${lerParaSala ? 'translate-x-7' : 'translate-x-1'}`} />
+    </div>
+    <div>
+      <p className="text-sm font-medium text-foreground">Ler para a sala 🔊</p>
+      <p className="text-xs text-muted-foreground mt-0.5">
+        {lerParaSala ? 'Sua mensagem será lida em voz alta para toda a turma' : 'Apenas o destinatário receberá a mensagem'}
+      </p>
+    </div>
+  </div>
+</motion.div>
 
             {/* Resumo do pedido */}
             <AnimatePresence>
