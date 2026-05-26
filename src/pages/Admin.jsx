@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Trash2, CheckCircle, Filter, LogOut, Heart, RefreshCw, Eye } from 'lucide-react';
+import { Search, Trash2, CheckCircle, Filter, LogOut, Heart, RefreshCw, Eye, DollarSign } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
 import StatsCards from '@/components/admin/StatsCards';
@@ -76,6 +76,25 @@ export default function Admin() {
       supabase.removeChannel(channel);
     };
   }, [authenticated, fetchCartinhas]);
+
+  const handleMarkPaid = async (id) => {
+    try {
+      const { error } = await supabase
+        .from('cartinhas')
+        .update({ status: 'paid' })
+        .eq('id', id);
+
+      if (error) throw error;
+
+      setCartinhas((prev) =>
+        prev.map((c) => (c.id === id ? { ...c, status: 'paid' } : c))
+      );
+      toast.success('Marcada como paga! 💰');
+    } catch (err) {
+      console.error(err);
+      toast.error('Erro ao atualizar status');
+    }
+  };
 
   const handleMarkDelivered = async (id) => {
     try {
@@ -293,6 +312,17 @@ export default function Admin() {
                         >
                           <Eye size={15} />
                         </motion.button>
+                        {c.status === 'pending' && (
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => handleMarkPaid(c.id)}
+                            className="p-2 rounded-xl hover:bg-blue-50 transition-colors text-blue-600"
+                            title="Marcar como pago"
+                          >
+                            <DollarSign size={15} />
+                          </motion.button>
+                        )}
                         {c.status !== 'delivered' && (
                           <motion.button
                             whileHover={{ scale: 1.1 }}
