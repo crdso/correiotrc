@@ -208,14 +208,14 @@ export default function Admin() {
               <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
             </motion.button>
             <motion.button
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  onClick={toggle}
-  className="p-2 rounded-xl hover:bg-muted transition-colors text-muted-foreground"
-  title="Alternar tema"
->
-  {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-</motion.button>
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={toggle}
+              className="p-2 rounded-xl hover:bg-muted transition-colors text-muted-foreground"
+              title="Alternar tema"
+            >
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -307,6 +307,9 @@ export default function Admin() {
                         </p>
                         {c.contact && (
                           <p className="text-xs text-accent mt-1">📱 {c.contact}</p>
+                        )}
+                        {c.ler_para_sala && (
+                          <p className="text-xs text-primary font-medium mt-1">🔊 Ler para a sala</p>
                         )}
                         <p className="text-xs text-muted-foreground/60 mt-2">
                           {c.created_at ? new Date(c.created_at).toLocaleString('pt-BR') : '—'}
