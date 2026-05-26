@@ -16,7 +16,7 @@ const STATUS_LABELS = {
 
 export default function Admin() {
   const [authenticated, setAuthenticated] = useState(
-    localStorage.getItem('admin_auth') === 'true'
+    localStorage.getItem('admin_auth_v2') === 'true'
   );
   const [password, setPassword] = useState('');
   const [cartinhas, setCartinhas] = useState([]);
@@ -29,7 +29,7 @@ export default function Admin() {
     e.preventDefault();
     if (password === ADMIN_PASSWORD) {
       setAuthenticated(true);
-      localStorage.setItem('admin_auth', 'true');
+      localStorage.setItem('admin_auth_v2', 'true');
     } else {
       toast.error('Senha incorreta 🔒');
     }
@@ -191,7 +191,7 @@ export default function Admin() {
               whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setAuthenticated(false);
-                localStorage.removeItem('admin_auth');
+                localStorage.removeItem('admin_auth_v2');
               }}
               className="flex items-center gap-2 px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
