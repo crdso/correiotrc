@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingBag, DollarSign, Clock, CheckCircle2, Heart } from 'lucide-react';
+import { ShoppingBag, DollarSign, Clock, CheckCircle2, Heart, Eye, EyeOff } from 'lucide-react';
 
 function AnimatedNumber({ value, prefix = '', suffix = '', decimals = 0 }) {
   const [displayed, setDisplayed] = useState(0);
-
   useEffect(() => {
     let start = 0;
     const steps = 40;
@@ -20,7 +19,6 @@ function AnimatedNumber({ value, prefix = '', suffix = '', decimals = 0 }) {
     }, 30);
     return () => clearInterval(timer);
   }, [value, decimals]);
-
   return (
     <span>
       {prefix}{decimals ? displayed.toFixed(decimals).replace('.', ',') : displayed.toLocaleString('pt-BR')}{suffix}
@@ -79,6 +77,8 @@ const cards = (stats) => [
 ];
 
 export default function StatsCards({ cartinhas }) {
+  const [showTotal, setShowTotal] = useState(false);
+
   const stats = useMemo(() => ({
     total: cartinhas.length,
     arrecadado: cartinhas.reduce((sum, c) => sum + (Number(c.valor) || 0), 0),
@@ -97,20 +97,36 @@ export default function StatsCards({ cartinhas }) {
           whileHover={{ y: -4, transition: { duration: 0.2 } }}
           className={`relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-br ${card.color} ${card.border} transition-all duration-300 p-5 cursor-default`}
         >
-          {/* Background decoration */}
           <div className="absolute -right-4 -bottom-4 w-20 h-20 rounded-full bg-current opacity-5" />
-
           <div className={`w-10 h-10 rounded-xl ${card.iconBg} flex items-center justify-center mb-4`}>
             <card.icon size={18} />
           </div>
-
-          <div className="text-2xl font-heading font-bold text-foreground leading-none mb-1">
-            <AnimatedNumber
-              value={card.value}
-              prefix={card.prefix || ''}
-              suffix={card.suffix || ''}
-              decimals={card.decimals}
-            />
+          <div className="text-2xl font-heading font-bold text-foreground leading-none mb-1 flex items-center gap-2">
+            {card.label === 'Total Arrecadado' ? (
+              <>
+                <span className={showTotal ? '' : 'blur-sm select-none'}>
+                  <AnimatedNumber
+                    value={card.value}
+                    prefix={card.prefix || ''}
+                    suffix={card.suffix || ''}
+                    decimals={card.decimals}
+                  />
+                </span>
+                <button
+                  onClick={() => setShowTotal(!showTotal)}
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {showTotal ? <EyeOff size={14} /> : <Eye size={14} />}
+                </button>
+              </>
+            ) : (
+              <AnimatedNumber
+                value={card.value}
+                prefix={card.prefix || ''}
+                suffix={card.suffix || ''}
+                decimals={card.decimals}
+              />
+            )}
           </div>
           <p className="text-xs text-muted-foreground font-medium mt-1">{card.label}</p>
         </motion.div>
