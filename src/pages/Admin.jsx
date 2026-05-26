@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Trash2, CheckCircle, Filter, LogOut, Heart, RefreshCw, Eye, DollarSign, Sun, Moon } from 'lucide-react';
+import { Search, Trash2, CheckCircle, Filter, LogOut, Heart, RefreshCw, Eye, DollarSign, Sun, Moon, Copy } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
 import StatsCards from '@/components/admin/StatsCards';
@@ -78,6 +78,14 @@ export default function Admin() {
       supabase.removeChannel(channel);
     };
   }, [authenticated, fetchCartinhas]);
+
+const handleCopy = (c) => {
+  const doce = c.gift_label || c.gift_type?.replace(/_/g, ' ') || '';
+  const lerSala = c.ler_para_sala ? '\n🔊 Ler para a sala' : '';
+  const texto = `${c.sender_name} - ${c.turma}\n*${doce}*\n${c.message}\n${lerSala}`;
+  navigator.clipboard.writeText(texto);
+  toast.success('Cartinha copiada! 📋');
+};
 
   const handleMarkPaid = async (id) => {
     try {
@@ -325,6 +333,15 @@ export default function Admin() {
                           title="Ver mensagem completa"
                         >
                           <Eye size={15} />
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          onClick={() => handleCopy(c)}
+                          className="p-2 rounded-xl hover:bg-muted transition-colors text-muted-foreground"
+                          title="Copiar cartinha"
+                        >
+                          <Copy size={15} />
                         </motion.button>
                         {c.status === 'pending' && (
                           <motion.button
