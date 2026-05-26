@@ -1,10 +1,11 @@
 // @ts-nocheck
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Trash2, CheckCircle, Filter, LogOut, Heart, RefreshCw, Eye, DollarSign } from 'lucide-react';
+import { Search, Trash2, CheckCircle, Filter, LogOut, Heart, RefreshCw, Eye, DollarSign, Sun, Moon } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
 import StatsCards from '@/components/admin/StatsCards';
+import { useTheme } from '@/hooks/useTheme';
 
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'l4b1nf022!!';
 
@@ -24,6 +25,7 @@ export default function Admin() {
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [expandedId, setExpandedId] = useState(null);
+  const { theme, toggle } = useTheme();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -205,6 +207,15 @@ export default function Admin() {
             >
               <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
             </motion.button>
+            <motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={toggle}
+  className="p-2 rounded-xl hover:bg-muted transition-colors text-muted-foreground"
+  title="Alternar tema"
+>
+  {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+</motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
