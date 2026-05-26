@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
 import StatsCards from '@/components/admin/StatsCards';
 
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'l4b1nf022!!';
 
 const STATUS_LABELS = {
   pending: { label: 'Pendente', color: 'bg-yellow-100 text-yellow-700' },
@@ -15,7 +15,9 @@ const STATUS_LABELS = {
 };
 
 export default function Admin() {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(
+    localStorage.getItem('admin_auth') === 'true'
+  );
   const [password, setPassword] = useState('');
   const [cartinhas, setCartinhas] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,6 +29,7 @@ export default function Admin() {
     e.preventDefault();
     if (password === ADMIN_PASSWORD) {
       setAuthenticated(true);
+      localStorage.setItem('admin_auth', 'true');
     } else {
       toast.error('Senha incorreta 🔒');
     }
@@ -186,7 +189,10 @@ export default function Admin() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setAuthenticated(false)}
+              onClick={() => {
+                setAuthenticated(false);
+                localStorage.removeItem('admin_auth');
+              }}
               className="flex items-center gap-2 px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <LogOut size={15} /> Sair
@@ -269,11 +275,6 @@ export default function Admin() {
                         <p className={`text-sm text-muted-foreground ${isExpanded ? '' : 'line-clamp-2'}`}>
                           {c.message}
                         </p>
-                        {c.ler_para_sala && (
-                          <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">
-                            🔊 Ler para sala
-                          </span>
-                        )}
                         {c.contact && (
                           <p className="text-xs text-accent mt-1">📱 {c.contact}</p>
                         )}
