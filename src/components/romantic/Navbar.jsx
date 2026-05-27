@@ -4,6 +4,25 @@ import { motion } from 'framer-motion';
 import { Heart, Send, Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/hooks/useTheme';
 
+function InstagramIcon({ size = 16 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 export default function Navbar() {
   const location = useLocation();
   const isHome = location.pathname === '/';
@@ -30,6 +49,20 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-3">
+
+          {/* Instagram */}
+          <motion.a
+            href="https://instagram.com/SEU_INSTAGRAM_AQUI"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+            aria-label="Instagram"
+          >
+            <InstagramIcon size={16} />
+          </motion.a>
+
           {/* Dark mode toggle */}
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -48,25 +81,26 @@ export default function Navbar() {
             </motion.div>
           </motion.button>
 
-        <Link to={isHome ? '/envio' : '/'}>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-5 py-2.5 rounded-full text-sm font-medium flex items-center gap-2 bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow"
-          >
-            {isHome ? (
-              <>
-                <Send size={14} />
-                Enviar Cartinha
-              </>
-            ) : (
-              <>
-                <Heart size={14} />
-                Início
-              </>
-            )}
-          </motion.button>
-        </Link>
+          <Link to={isHome ? '/envio' : '/'}>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-5 py-2.5 rounded-full text-sm font-medium flex items-center gap-2 bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow"
+            >
+              {isHome ? (
+                <>
+                  <Send size={14} />
+                  Enviar Cartinha
+                </>
+              ) : (
+                <>
+                  <Heart size={14} />
+                  Início
+                </>
+              )}
+            </motion.button>
+          </Link>
+
         </div>
       </div>
     </motion.nav>
