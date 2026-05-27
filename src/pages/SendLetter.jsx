@@ -61,14 +61,8 @@ const validate = () => {
 } else {
   const words = message.trim().split(/\s+/).filter(w => w.length > 1);
   const meaningfulWords = words.filter(w => w.length >= 2);
-  const hasRepetition = /(.)\1{4,}/.test(message);
-  const hasRealWords = meaningfulWords.some(w => /[aeiouáéíóúãõâêîôû]/i.test(w));
-  const hasGibberish = words.some(w => /[^aeiouáéíóúãõâêîôû\s]{4,}/i.test(w));
 
   if (meaningfulWords.length < 3) newErrors.message = 'Escreva uma mensagem de verdade (mínimo 3 palavras)';
-  else if (hasRepetition) newErrors.message = 'Mensagem inválida';
-  else if (!hasRealWords) newErrors.message = 'Mensagem inválida';
-  else if (hasGibberish) newErrors.message = 'Mensagem inválida';
   else if (message.length > maxChars) newErrors.message = 'Mensagem muito longa';
 }
 
