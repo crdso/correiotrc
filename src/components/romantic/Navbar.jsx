@@ -52,7 +52,7 @@ export default function Navbar() {
 
           {/* Instagram */}
           <motion.a
-            href="https://instagram.com/SEU_INSTAGRAM_AQUI"
+            href="https://instagram.com/terceirao.trc"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.1 }}
