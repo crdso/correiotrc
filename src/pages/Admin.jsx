@@ -5,6 +5,7 @@ import { Search, Trash2, CheckCircle, Filter, LogOut, Heart, RefreshCw, Eye, Dol
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
 import StatsCards from '@/components/admin/StatsCards';
+import GastoManager from '@/components/admin/GastoManager';
 import { useTheme } from '@/hooks/useTheme';
 
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'l4b1nf022!!';
@@ -21,6 +22,7 @@ export default function Admin() {
   );
   const [password, setPassword] = useState('');
   const [cartinhas, setCartinhas] = useState([]);
+  const [gastos, setGastos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
@@ -79,13 +81,13 @@ export default function Admin() {
     };
   }, [authenticated, fetchCartinhas]);
 
-const handleCopy = (c) => {
-  const doce = c.gift_label || c.gift_type?.replace(/_/g, ' ') || '';
-  const lerSala = c.ler_para_sala ? '\n🔊 Ler para a sala' : '';
-  const texto = `${c.sender_name} - ${c.turma}\n*${doce}*\n${c.message}\n${lerSala}`;
-  navigator.clipboard.writeText(texto);
-  toast.success('Cartinha copiada! 📋');
-};
+  const handleCopy = (c) => {
+    const doce = c.gift_label || c.gift_type?.replace(/_/g, ' ') || '';
+    const lerSala = c.ler_para_sala ? '\n🔊 Ler para a sala' : '';
+    const texto = `${c.sender_name} - ${c.turma}\n*${doce}*\n${c.message}\n${lerSala}`;
+    navigator.clipboard.writeText(texto);
+    toast.success('Cartinha copiada! 📋');
+  };
 
   const handleMarkPaid = async (id) => {
     try {
@@ -240,7 +242,11 @@ const handleCopy = (c) => {
       </div>
 
       <div className="max-w-6xl mx-auto px-6 py-8">
-        <StatsCards cartinhas={cartinhasForStats} />
+        {/* StatsCards agora recebe gastos */}
+        <StatsCards cartinhas={cartinhasForStats} gastos={gastos} />
+
+        {/* GastoManager logo abaixo dos cards */}
+        <GastoManager onGastosChange={setGastos} />
 
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="relative flex-1">
