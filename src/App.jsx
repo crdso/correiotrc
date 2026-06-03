@@ -4,6 +4,7 @@ import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider } from '@/lib/AuthContext';
+import Encerramento from './pages/Encerramento';
 import Home from './pages/Home';
 import SendLetter from './pages/SendLetter.jsx';
 import Sucesso from './pages/Sucesso';
@@ -17,7 +18,8 @@ function App() {
         <Router>
           <CustomCursor />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Encerramento />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/envio" element={<SendLetter />} />
             <Route path="/sucesso" element={<Sucesso />} />
             <Route path="/admin" element={<Admin />} />
