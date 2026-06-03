@@ -27,7 +27,7 @@ function Sparkle({ x, y, delay }) {
       animate={{ scale: [0, 1, 0], opacity: [0, 0.6, 0], rotate: [0, 180] }}
       transition={{ duration: 2.5 + Math.random() * 2, repeat: Infinity, delay, ease: 'easeInOut' }}
     >
-      ✦
+      Ɑ͞ ̶͞ ̶͞ ̶͞ ̶͞ ﻝﮞ͞
     </motion.div>
   );
 }
