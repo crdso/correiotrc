@@ -117,7 +117,7 @@ export default function Encerramento() {
             <span className="font-heading font-bold text-primary text-2xl md:text-3xl tabular-nums">
               {count.toLocaleString('pt-BR')}
             </span>{' '}
-            mensagens foram enviadas, sorrisos foram criados e muitas histórias ganharam um capítulo especial.
+            mensagens foram enviadas.
           </p>
         </motion.div>
 
@@ -200,6 +200,7 @@ export default function Encerramento() {
         <div className="flex items-center justify-center gap-2 text-muted-foreground/50 text-sm">
           <Heart size={12} className="text-primary/40 fill-primary/40" />
           <span>Correio Elegante TRC • 2026</span>
+          <span>dev: cardoso</span>
           <Heart size={12} className="text-primary/40 fill-primary/40" />
         </div>
       </motion.footer>
