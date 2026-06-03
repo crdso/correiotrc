@@ -195,10 +195,8 @@ export default function Encerramento() {
         className="relative z-20 mt-20 text-center"
       >
         <div className="flex items-center justify-center gap-2 text-muted-foreground/50 text-sm">
-          <Heart size={12} className="text-primary/40 fill-primary/40" />
-          <span>Correio Elegante TRC • 2026</span>
-          <span>dev: cardoso</span>
-          <Heart size={12} className="text-primary/40 fill-primary/40" />
+          <span>Correio Elegante - 3TRC26</span>
+          <span>/ dev: cardoso</span>
         </div>
       </motion.footer>
     </div>
