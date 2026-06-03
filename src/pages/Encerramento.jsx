@@ -4,7 +4,7 @@ import { Heart, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // ✏️ EDITE ESTE NÚMERO PARA ATUALIZAR AS ESTATÍSTICAS
-const TOTAL_CARTINHAS = 347;
+const TOTAL_CARTINHAS = 127;
 
 // Partículas flutuantes ao fundo
 function Particle({ x, y, delay, size, opacity }) {
