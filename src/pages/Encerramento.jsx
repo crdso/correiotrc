@@ -159,9 +159,6 @@ export default function Encerramento() {
           transition={{ duration: 0.9, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="space-y-4 max-w-xl"
         >
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-            Gostaríamos de agradecer a todos que participaram do projeto. Cada cartinha enviada ajudou a transformar a escola em um lugar mais divertido, emocionante e cheio de boas lembranças.
-          </p>
           <p className="text-muted-foreground text-base md:text-lg font-medium">
             Obrigado por fazer parte dessa experiência.
           </p>
@@ -184,7 +181,7 @@ export default function Encerramento() {
         >
           <p className="font-heading italic text-xl md:text-2xl text-foreground/80 leading-relaxed">
             "Algumas mensagens terminam no papel.<br />
-            Outras continuam para sempre na memória. ❤️"
+            Outras continuam para sempre na memória."
           </p>
         </motion.div>
 
