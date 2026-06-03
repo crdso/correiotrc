@@ -134,11 +134,11 @@ export default function Encerramento() {
         >
           <p className="text-2xl">🌹</p>
           <p className="text-foreground text-base md:text-lg font-medium text-center leading-relaxed">
-            Ainda aceitamos pedidos de <span className="text-primary font-bold">carta rosa</span> até o dia{' '}
+            Ainda aceitamos pedidos de <span className="text-primary font-bold">carta + rosa</span> até o dia{' '}
             <span className="text-primary font-bold">09 de junho</span>!
           </p>
           <p className="text-muted-foreground text-sm text-center">
-            Aproveite e envie uma rosa para alguém especial antes que encerre de vez. 🌸
+            Aproveite e envie uma rosa para alguém especial antes que encerre de vez. 
           </p>
           <Link to="/envio">
             <motion.button
