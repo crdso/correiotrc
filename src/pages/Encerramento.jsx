@@ -148,7 +148,7 @@ export default function Encerramento() {
           transition={{ duration: 0.9, delay: 1, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-md"
         >
-          <p className="font-heading italic text-xl md:text-2xl text-foreground/80 leading-relaxed">
+          <p className="font-heading italic text-xl md:text-2xl text-foreground/90 leading-relaxed">
             "Algumas mensagens terminam no papel.<br />
             Outras continuam para sempre na memória."
           </p>
@@ -163,7 +163,7 @@ export default function Encerramento() {
         transition={{ delay: 1.4, duration: 1 }}
         className="relative z-20 mt-20 text-center"
       >
-        <div className="flex items-center justify-center gap-2 text-muted-foreground/50 text-sm">
+        <div className="flex items-center justify-center gap-2 text-muted-foreground/80 text-sm">
           <span>Correio Elegante - 3TRC26</span>
           <span>/ dev: cardoso</span>
         </div>
