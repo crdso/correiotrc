@@ -121,37 +121,6 @@ export default function Encerramento() {
           </p>
         </motion.div>
 
-        {/* Banner pedido de rosa */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full max-w-xl rounded-2xl border border-primary/20 p-6 flex flex-col items-center gap-4"
-          style={{
-            background: 'linear-gradient(135deg, hsl(350 96% 43% / 0.06), hsl(38 47% 56% / 0.05))',
-            backdropFilter: 'blur(12px)',
-          }}
-        >
-          <p className="text-2xl">🌹</p>
-          <p className="text-foreground text-base md:text-lg font-medium text-center leading-relaxed">
-            Ainda aceitamos pedidos de <span className="text-primary font-bold">carta + rosa</span> até o dia{' '}
-            <span className="text-primary font-bold">09 de junho</span>!
-          </p>
-          <p className="text-muted-foreground text-sm text-center">
-            Aproveite e envie uma rosa para alguém especial antes que encerre de vez. 
-          </p>
-          <Link to="/envio">
-            <motion.button
-              whileHover={{ scale: 1.04, boxShadow: '0 16px 32px hsl(350 96% 43% / 0.25)' }}
-              whileTap={{ scale: 0.97 }}
-              className="mt-1 px-8 py-3 bg-primary text-primary-foreground rounded-full font-semibold text-sm flex items-center gap-2 shadow-lg shadow-primary/20"
-            >
-              <Send size={15} />
-              Enviar pedido de rosa
-            </motion.button>
-          </Link>
-        </motion.div>
-
         {/* Texto de agradecimento */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
